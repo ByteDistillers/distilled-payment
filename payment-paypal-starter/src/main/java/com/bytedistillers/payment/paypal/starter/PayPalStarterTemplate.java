@@ -19,7 +19,7 @@ public class PayPalStarterTemplate {
   private FormData staticFormData;
 
   private FormGeneratorUtil formGenUtil = new FormGeneratorUtil();
-  private FormDataMergeUtil<? extends FormData> formMergeUtil = new FormDataMergeUtil<? extends FormData>();
+  private FormDataMergeUtil<? extends PaypalFormData> formMergeUtil = new FormDataMergeUtil<? extends PaypalFormData>();
 
   public PayPalStarterTemplate() {
   }
