@@ -22,11 +22,11 @@ public class SofortClassicTemplate {
 
   public SofortClassicTemplate() {
   }
-
+  
   public SofortClassicTemplate(ClassicFormData staticFormData) {
     this.staticFormData = staticFormData;
   }
-
+  
   public String generateHtmlForm(ClassicFormData dynamicFormData) {
     ClassicFormData mergedFormData = mergeFormData(dynamicFormData);
 

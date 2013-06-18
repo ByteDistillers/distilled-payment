@@ -17,8 +17,8 @@ public class PayPalStarterTemplateTest {
   @Test
   public void generateCartHtml() {
     StarterCartFormData formData = generateCartFormData();
+    template = new PayPalStarterTemplate(formData);
     template.setFormTarget("_blank");
-    template.setFormData(formData);
 
     String html = template.generateHtmlForm(new StarterCartFormData());
     System.out.println(html);
@@ -41,7 +41,7 @@ public class PayPalStarterTemplateTest {
   public void generateXclickHtml() {
     StarterXclickFormData formData = generateXclickFormData();
     template.setFormTarget("_blank");
-    template.setFormData(formData);
+    template = new PayPalStarterTemplate(formData);
 
     String html = template.generateHtmlForm(new StarterXclickFormData());
     System.out.println(html);

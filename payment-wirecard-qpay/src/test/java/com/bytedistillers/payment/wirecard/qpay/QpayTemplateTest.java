@@ -39,7 +39,6 @@ public class QpayTemplateTest {
   public void generateHtml() {
     QpayFormData dynamicFormData = new QpayFormData();
     dynamicFormData.setAmount(BigDecimal.valueOf(123.4567));
-    dynamicFormData.setLanguage("en");
 
     String html = template.generateHtmlForm(dynamicFormData);
     System.out.println(html);

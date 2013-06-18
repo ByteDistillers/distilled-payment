@@ -5,6 +5,8 @@ import java.util.List;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+import com.bytedistillers.payment.common.form.FormData;
+import com.bytedistillers.payment.common.form.FormDataMergeUtil;
 import com.bytedistillers.payment.common.form.FormGeneratorUtil;
 
 public class PayPalStarterTemplate {
@@ -14,18 +16,28 @@ public class PayPalStarterTemplate {
   private String formAction = "https://www.paypal.com/cgi-bin/webscr";
   private String formTarget;
   private String formName = "paypalStarterForm";
-  private PaypalFormData staticFormData;
+  private FormData staticFormData;
 
   private FormGeneratorUtil formGenUtil = new FormGeneratorUtil();
+  private FormDataMergeUtil<? extends FormData> formMergeUtil = new FormDataMergeUtil<? extends FormData>();
 
-  public String generateHtmlForm(PaypalFormData dynamicFormData) {
+  public PayPalStarterTemplate() {
+  }
+
+  public PayPalStarterTemplate(FormData staticFormData) {
+    this.staticFormData = staticFormData;
+  }
+
+  public String generateHtmlForm(FormData dynamicFormData) {
+    PaypalFormData mergedFormData = formMergeUtil.merge(dynamicFormData, staticFormData, staticFormData.getClass());
+
     String toAppend = formGenUtil.generateFormStartTag(formAction, formTarget, formName);
     StringBuilder result = new StringBuilder(toAppend);
 
-    toAppend = formGenUtil.generateFieldValues(staticFormData.getClass(), staticFormData);
+    toAppend = formGenUtil.generateFieldValues(mergedFormData.getClass(), mergedFormData);
     result.append(toAppend);
-    if (staticFormData instanceof StarterCartFormData) {
-      List<CartItem> items = ((StarterCartFormData) staticFormData).getItems();
+    if (mergedFormData instanceof StarterCartFormData) {
+      List<CartItem> items = ((StarterCartFormData) mergedFormData).getItems();
       int idx = 0;
       for (CartItem item : items) {
         toAppend = formGenUtil.generateFieldValues(item.getClass(), item, ("_" + ++idx));
@@ -38,11 +50,7 @@ public class PayPalStarterTemplate {
     return result.toString();
   }
 
-  public void setFormData(PaypalFormData formData) {
-    this.staticFormData = formData;
-  }
-
-  public PaypalFormData getFormData() {
+  public FormData getStaticFormData() {
     return staticFormData;
   }
 

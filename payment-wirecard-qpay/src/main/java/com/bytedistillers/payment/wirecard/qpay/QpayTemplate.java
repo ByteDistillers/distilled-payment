@@ -41,7 +41,7 @@ public class QpayTemplate {
   }
 
   public String generateHtmlForm(QpayFormData dynamicFormData) {
-    QpayFormData mergedFormData = formDataMergeUtil.merge(dynamicFormData, staticFormData, QpayFormData.class);
+    QpayFormData mergedFormData = formDataMergeUtil.merge(dynamicFormData, dynamicFormData, QpayFormData.class);
 
     String toAppend = formGeneratorUtil.generateFormStartTag(formActionUrl, formTarget, formName);
     StringBuilder result = new StringBuilder(toAppend);
