@@ -19,7 +19,7 @@ public class PayPalStarterTemplate {
   private FormData staticFormData;
 
   private FormGeneratorUtil formGenUtil = new FormGeneratorUtil();
-  private FormDataMergeUtil<? extends PaypalFormData> formMergeUtil = new FormDataMergeUtil<? extends PaypalFormData>();
+  private FormDataMergeUtil<FormData> formMergeUtil = new FormDataMergeUtil<FormData>();
 
   public PayPalStarterTemplate() {
   }
@@ -29,7 +29,7 @@ public class PayPalStarterTemplate {
   }
 
   public String generateHtmlForm(FormData dynamicFormData) {
-    PaypalFormData mergedFormData = formMergeUtil.merge(dynamicFormData, staticFormData, staticFormData.getClass());
+    FormData mergedFormData = formMergeUtil.merge(dynamicFormData, staticFormData, staticFormData.getClass());
 
     String toAppend = formGenUtil.generateFormStartTag(formAction, formTarget, formName);
     StringBuilder result = new StringBuilder(toAppend);

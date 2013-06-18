@@ -8,8 +8,8 @@ import java.util.Map;
 
 public class FormDataMergeUtil<T extends FormData> {
 
-  public T merge(T dynamicData, T staticData, Class<T> clazz) {
-    T result = createNewInstance(clazz);
+  public T merge(T dynamicData, T staticData, Class<? extends FormData> clazz) {
+    T result = (T) createNewInstance(clazz);
 
     Field[] fields = clazz.getDeclaredFields();
     for (Field field : fields) {
@@ -55,9 +55,9 @@ public class FormDataMergeUtil<T extends FormData> {
     }
   }
 
-  private T createNewInstance(Class<T> clazz) {
+  private Object createNewInstance(Class<? extends FormData> clazz) {
     try {
-      T result = clazz.newInstance();
+      Object result = clazz.newInstance();
       return result;
     } catch (Exception e) {
       throw new RuntimeException(e.getMessage(), e);
