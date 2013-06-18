@@ -1,0 +1,155 @@
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+  <modelVersion>4.0.0</modelVersion>
+  <groupId>com.bytedistillers.payment</groupId>
+  <artifactId>distilled-payment</artifactId>
+  <version>0.3.2-SNAPSHOT</version>
+  <packaging>pom</packaging>
+ 
+  <properties>
+    <distilled-payment.version>0.3.2-SNAPSHOT</distilled-payment.version>
+
+    <commons-io.version>2.4</commons-io.version>
+    <httpclient.version>4.2.3</httpclient.version>
+    <junit.version>4.10</junit.version>
+    <logback.version>1.0.13</logback.version>
+    <slf4j.version>1.7.2</slf4j.version>
+  </properties>
+  
+  <scm>
+    <developerConnection>scm:git:https://github.com/ByteDistillers/distilled-payment/${project.artifactId}</developerConnection>
+    <connection>scm:git:https://github.com/ByteDistillers/distilled-payment/${project.artifactId}</connection>
+    <url>https://github.com/ByteDistillers/distilled-payment/${project.artifactId}</url>
+  </scm>
+  
+  <distributionManagement>
+    <snapshotRepository>
+      <id>snapshots</id>
+      <name>Snapshots</name>
+      <url>http://nexus.intranet:8081/nexus/content/repositories/snapshots/</url>
+    </snapshotRepository>
+    <repository>
+      <id>releases</id>
+      <name>Releases</name>
+      <url>http://nexus.intranet:8081/nexus/content/repositories/releases/</url>
+    </repository>
+  </distributionManagement>
+
+  <dependencyManagement>
+    <dependencies>
+      <dependency>
+        <groupId>com.bytedistillers.payment</groupId>
+        <artifactId>distilled-payment-common-http</artifactId>
+        <version>${distilled-payment.version}</version>
+      </dependency>
+      <dependency>
+        <groupId>com.bytedistillers.payment</groupId>
+        <artifactId>distilled-payment-common-form</artifactId>
+        <version>${distilled-payment.version}</version>
+      </dependency>
+
+      <dependency>
+        <groupId>org.slf4j</groupId>
+        <artifactId>slf4j-api</artifactId>
+        <version>${slf4j.version}</version>
+      </dependency>
+
+      <dependency>
+        <groupId>org.apache.httpcomponents</groupId>
+        <artifactId>httpclient</artifactId>
+        <version>${httpclient.version}</version>
+        <exclusions>
+          <exclusion>
+            <artifactId>commons-logging</artifactId>
+            <groupId>commons-logging</groupId>
+          </exclusion>
+        </exclusions>
+      </dependency>
+
+      <dependency>
+        <groupId>commons-io</groupId>
+        <artifactId>commons-io</artifactId>
+        <version>${commons-io.version}</version>
+      </dependency>
+    </dependencies>
+  </dependencyManagement>
+
+  <dependencies>
+    <dependency>
+      <groupId>org.slf4j</groupId>
+      <artifactId>slf4j-api</artifactId>
+    </dependency>
+    <dependency>
+      <groupId>commons-beanutils</groupId>
+      <artifactId>commons-beanutils</artifactId>
+      <version>1.8.3</version>
+    </dependency>
+
+    <dependency>
+      <groupId>ch.qos.logback</groupId>
+      <artifactId>logback-classic</artifactId>
+      <version>${logback.version}</version>
+    </dependency>
+    <dependency>
+      <groupId>org.slf4j</groupId>
+      <artifactId>jcl-over-slf4j</artifactId>
+      <version>${slf4j.version}</version>
+    </dependency>
+    <dependency>
+      <groupId>org.slf4j</groupId>
+      <artifactId>log4j-over-slf4j</artifactId>
+      <version>${slf4j.version}</version>
+    </dependency>
+    <dependency>
+      <groupId>org.slf4j</groupId>
+      <artifactId>jul-to-slf4j</artifactId>
+      <version>${slf4j.version}</version>
+    </dependency>
+    
+    <dependency>
+      <groupId>junit</groupId>
+      <artifactId>junit</artifactId>
+      <version>${junit.version}</version>
+      <scope>test</scope>
+    </dependency>
+  </dependencies>
+  
+  <build>
+    <plugins>
+      <!-- plugin>
+        <groupId>org.apache.maven.plugins</groupId>
+        <artifactId>maven-release-plugin</artifactId>
+        <version>2.4</version>
+        <configuration>
+          <tagBase>http://svn.intranet:3690/svn/pagu-checkout/tags</tagBase>
+        </configuration>
+      </plugin -->
+      <plugin>
+        <groupId>org.apache.maven.plugins</groupId>
+        <artifactId>maven-javadoc-plugin</artifactId>
+        <version>2.9</version>
+        <configuration>
+          <skip>true</skip>
+        </configuration>
+      </plugin>
+
+      <plugin>
+        <groupId>org.apache.maven.plugins</groupId>
+        <artifactId>maven-compiler-plugin</artifactId>
+        <version>2.3.2</version>
+        <configuration>
+          <source>1.6</source>
+          <target>1.6</target>
+        </configuration>
+      </plugin>
+
+    </plugins>
+  </build>
+  
+  <modules>
+    <module>../payment-common</module>
+    <module>../payment-paypal-starter</module>
+    <module>../payment-sofort-classic</module>
+    <module>../payment-sofort-gateway</module>
+    <module>../payment-wirecard-qpay</module>
+  </modules>
+</project>
