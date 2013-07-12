@@ -2,11 +2,11 @@
   <modelVersion>4.0.0</modelVersion>
   <groupId>com.bytedistillers.payment</groupId>
   <artifactId>distilled-payment</artifactId>
-  <version>0.4.0-SNAPSHOT</version>
+  <version>0.4.1-SNAPSHOT</version>
   <packaging>pom</packaging>
  
   <properties>
-    <distilled-payment.version>0.4.0-SNAPSHOT</distilled-payment.version>
+    <distilled-payment.version>0.4.1-SNAPSHOT</distilled-payment.version>
 
     <commons-io.version>2.4</commons-io.version>
     <httpclient.version>4.2.3</httpclient.version>
