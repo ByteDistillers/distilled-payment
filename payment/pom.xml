@@ -16,9 +16,9 @@
   </properties>
   
   <scm>
-    <developerConnection>scm:git:https://github.com/ByteDistillers/distilled-payment/${project.artifactId}</developerConnection>
-    <connection>scm:git:https://github.com/ByteDistillers/distilled-payment/${project.artifactId}</connection>
-    <url>https://github.com/ByteDistillers/distilled-payment/${project.artifactId}</url>
+    <developerConnection>scm:git:https://github.com/ByteDistillers/distilled-payment/${project.artifactId}?foo=</developerConnection>
+    <connection>scm:git:https://github.com/ByteDistillers/distilled-payment/${project.artifactId}?foo=</connection>
+    <url>https://github.com/ByteDistillers/distilled-payment/${project.artifactId}?foo=</url>
   </scm>
   
   <distributionManagement>
