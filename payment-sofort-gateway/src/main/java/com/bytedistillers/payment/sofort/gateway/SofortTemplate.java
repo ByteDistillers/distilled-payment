@@ -6,6 +6,7 @@ import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.List;
 
+import javax.xml.parsers.ParserConfigurationException;
 import javax.xml.transform.OutputKeys;
 import javax.xml.transform.Transformer;
 import javax.xml.transform.TransformerFactory;
@@ -41,6 +42,10 @@ public class SofortTemplate extends AbstractHttpBinding {
   private String host = "https://api.sofort.com";
 
   private SofortTransactionParameters transactionParameters;
+
+  public SofortTemplate() throws ParserConfigurationException {
+    super();
+  }
 
   public TransactionResponse startTransaction() {
     HttpPost httpPost = generatePost(createRequestXml(transactionParameters));
@@ -83,8 +88,8 @@ public class SofortTemplate extends AbstractHttpBinding {
     result.appendChild(rootNode);
 
     rootNode.appendChild(createNode(result, "project_id", data.getProjectId() + ""));
-    //    rootNode.appendChild(createNode(result, "language_code", "de"));
-    //    rootNode.appendChild(createNode(result, "interface_version", "pn_test_1"));
+    // rootNode.appendChild(createNode(result, "language_code", "de"));
+    // rootNode.appendChild(createNode(result, "interface_version", "pn_test_1"));
     rootNode.appendChild(createNode(result, "amount", data.getAmount().toPlainString()));
     rootNode.appendChild(createNode(result, "currency_code", data.getCurrencyCode()));
 
@@ -94,7 +99,7 @@ public class SofortTemplate extends AbstractHttpBinding {
     rootNode.appendChild(createNode(result, "abort_url", transactionParameters.getCancelUrl()));
 
     Element suNode = result.createElement("su");
-    //    suNode.appendChild(createNode(result, "amount", "345.45"));
+    // suNode.appendChild(createNode(result, "amount", "345.45"));
 
     rootNode.appendChild(suNode);
 
@@ -162,12 +167,9 @@ public class SofortTemplate extends AbstractHttpBinding {
     return result;
 
     /*
-    } catch (SAXException e) {
-    logger.error("SAXException while trying to parse new_transaction document: " + e.getMessage(), e);
-    } catch (IOException e) {
-    logger.error("IOException while trying to parse new_transaction document: " + e.getMessage(), e);
-    }
-    */
+     * } catch (SAXException e) { logger.error("SAXException while trying to parse new_transaction document: " + e.getMessage(), e); } catch (IOException e) {
+     * logger.error("IOException while trying to parse new_transaction document: " + e.getMessage(), e); }
+     */
   }
 
   private TransactionErrors extractErrorData(Document doc) {

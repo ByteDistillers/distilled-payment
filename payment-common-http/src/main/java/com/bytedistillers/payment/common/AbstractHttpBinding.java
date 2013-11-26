@@ -4,9 +4,9 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.util.Collections;
 
-import javax.annotation.PostConstruct;
 import javax.xml.parsers.DocumentBuilder;
 import javax.xml.parsers.DocumentBuilderFactory;
+import javax.xml.parsers.ParserConfigurationException;
 
 import org.apache.http.HttpEntity;
 import org.apache.http.HttpResponse;
@@ -28,17 +28,13 @@ public abstract class AbstractHttpBinding {
   private HttpClient httpClient;
   private DocumentBuilder docBuilder;
 
-  protected AbstractHttpBinding() {
+  protected AbstractHttpBinding() throws ParserConfigurationException {
     this(new SystemDefaultHttpClient());
     httpClient.getParams().setParameter(AuthPNames.TARGET_AUTH_PREF, Collections.singletonList(AuthPolicy.BASIC));
   }
 
-  protected AbstractHttpBinding(HttpClient httpClient) {
+  protected AbstractHttpBinding(HttpClient httpClient) throws ParserConfigurationException {
     this.httpClient = httpClient;
-  }
-
-  @PostConstruct
-  public void afterPropertiesSet() throws Exception {
     docBuilder = DocumentBuilderFactory.newInstance().newDocumentBuilder();
   }
 
